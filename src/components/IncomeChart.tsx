@@ -88,7 +88,7 @@ export default function IncomeChart() {
       </View>
 
      <LineChart
-        data={chartData}
+        data={chartData}                 
         areaChart
         curved
         height={220}
@@ -100,9 +100,8 @@ export default function IncomeChart() {
         startOpacity={0.18}
         endOpacity={0.02}
         hideDataPoints
-        backgroundColor="white"
 
-        // Rejilla y ejes
+        backgroundColor="white"
         yAxisThickness={0}
         xAxisThickness={0}
         noOfSections={4}
@@ -112,57 +111,60 @@ export default function IncomeChart() {
         yAxisTextStyle={{ color: colors.textGray, fontSize: 10 }}
         xAxisLabelTextStyle={{ color: colors.textGray, fontSize: 11, marginTop: 6 }}
 
-        // Sin desbordes
-        initialSpacing={initialSpacing}
-        endSpacing={endSpacing}
-        spacing={spacing}
+        // Evitar overflow a la derecha
+        initialSpacing={12}
+        endSpacing={12}
+        spacing={
+          chartData.length > 1
+            ? Math.max(10, (innerWidth - 24) / (chartData.length - 1))
+            : 40
+        }
         showScrollIndicator={false}
 
-        // === BURBUJA / TOOLTIP ===
-      pointerConfig={
-        {
-          // Tap inmediato (no long press)
-          activatePointersOnLongPress: false,
+        pointerConfig={
+          {
+            activatePointersOnLongPress: false,  
 
-          // Línea vertical y punto
-          pointerStripUptoDataPoint: true,
-          pointerStripColor: '#94A3B8',
-          pointerStripWidth: 1,
-          pointerColor: '#3B82F6',
-          radius: 5,
+            // línea vertical y punto de foco
+            pointerStripUptoDataPoint: true,
+            pointerStripColor: '#94A3B8',
+            pointerStripWidth: 1,
+            pointerColor: '#3B82F6',
+            radius: 5,
 
-          // Burbuja (tooltip)
-          autoAdjustPointerLabelPosition: true,
-          pointerVanishDelay: 1800,
-          pointerLabelWidth: 120,
-          pointerLabelHeight: 56,
-          pointerLabelComponent: (items: any[]) => {
-            const d = items?.[0]?.item?.customData;
-            if (!d) return null;
-            return (
-              <View
-                style={{
-                  backgroundColor: '#E0EAFF',
-                  paddingVertical: 8,
-                  paddingHorizontal: 10,
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: '#C7D2FE',
-                }}
-              >
-                <Text style={{ color: '#111827', fontSize: 12, fontWeight: '700' }}>
-                  {formatTooltipMoney(d.y, currency)}
-                </Text>
-                <Text style={{ color: '#374151', fontSize: 11, marginTop: 2 }}>
-                  {formatTooltipDate(d.date)}
-                </Text>
-              </View>
-            );
-          },
-        } as any
-      }
+            // comportamiento y tamaño de la tarjeta
+            pointerVanishDelay: 1800,
+            autoAdjustPointerLabelPosition: true,
+            pointerLabelWidth: 126,
+            pointerLabelHeight: 58,
 
-/>
+            // contenido de la burbuja
+            pointerLabelComponent: (items: any[]) => {
+              const d = items?.[0]?.item?.customData;
+              if (!d) return null;
+              return (
+                <View
+                  style={{
+                    backgroundColor: '#E0EAFF',
+                    paddingVertical: 8,
+                    paddingHorizontal: 10,
+                    borderRadius: 10,
+                    borderWidth: 1,
+                    borderColor: '#C7D2FE',
+                  }}
+                >
+                  <Text style={{ color: '#111827', fontSize: 12, fontWeight: '700' }}>
+                    {formatTooltipMoney(d.y, currency)}
+                  </Text>
+                  <Text style={{ color: '#374151', fontSize: 11, marginTop: 2 }}>
+                    {formatTooltipDate(d.date)}
+                  </Text>
+                </View>
+              );
+            },
+          } as any  
+        }
+      />
 
     </View>
   );
