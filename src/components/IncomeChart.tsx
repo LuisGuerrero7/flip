@@ -30,7 +30,7 @@ function labelFor(period: Period, d: Date, i: number, len: number) {
     }
     case '1M': {
       const day = d.getDate();
-      return [ 5, 15, 25, 30].includes(day) ? String(day) : '';
+      return [ 1, 5,10, 15,20, 25, 30].includes(day) ? String(day) : '';
     }
     case '1Y': {
       const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -74,7 +74,7 @@ export default function IncomeChart() {
   return (
     <View
       style={[
-        tw`mx-4 mt-5 p-4`,
+        tw`mx-4 mt-5 p-4 `,
       ]}
     >
 
@@ -88,7 +88,7 @@ export default function IncomeChart() {
       </View>
 
      <LineChart
-        data={chartData}                 
+        data={chartData}
         areaChart
         curved
         height={220}
@@ -99,7 +99,7 @@ export default function IncomeChart() {
         endFillColor={colors.accent}
         startOpacity={0.18}
         endOpacity={0.02}
-        hideDataPoints
+        hideDataPoints                              
 
         backgroundColor="white"
         yAxisThickness={0}
@@ -109,9 +109,9 @@ export default function IncomeChart() {
         rulesColor="#E2E8F0"
         rulesThickness={0.5}
         yAxisTextStyle={{ color: colors.textGray, fontSize: 10 }}
-        xAxisLabelTextStyle={{ color: colors.textGray, fontSize: 11, marginTop: 6 }}
+        xAxisLabelTextStyle={{ color: colors.textGray, fontSize: 11, marginTop: 10}}  
+        xAxisLabelsHeight={24}                                                         
 
-        // Evitar overflow a la derecha
         initialSpacing={12}
         endSpacing={12}
         spacing={
@@ -121,49 +121,45 @@ export default function IncomeChart() {
         }
         showScrollIndicator={false}
 
-        pointerConfig={
-          {
-            activatePointersOnLongPress: false,  
+        pointerConfig={{
+          activatePointersOnLongPress: true,
 
-            // línea vertical y punto de foco
-            pointerStripUptoDataPoint: true,
-            pointerStripColor: '#94A3B8',
-            pointerStripWidth: 1,
-            pointerColor: '#3B82F6',
-            radius: 5,
+          pointerStripUptoDataPoint: true,
+          pointerStripColor: '#94A3B8',
+          pointerStripWidth: 1,
 
-            // comportamiento y tamaño de la tarjeta
-            pointerVanishDelay: 1800,
-            autoAdjustPointerLabelPosition: true,
-            pointerLabelWidth: 126,
-            pointerLabelHeight: 58,
+          pointerColor: '#3B82F6',
+          radius: 5,
 
-            // contenido de la burbuja
-            pointerLabelComponent: (items: any[]) => {
-              const d = items?.[0]?.item?.customData;
-              if (!d) return null;
-              return (
-                <View
-                  style={{
-                    backgroundColor: '#E0EAFF',
-                    paddingVertical: 8,
-                    paddingHorizontal: 10,
-                    borderRadius: 10,
-                    borderWidth: 1,
-                    borderColor: '#C7D2FE',
-                  }}
-                >
-                  <Text style={{ color: '#111827', fontSize: 12, fontWeight: '700' }}>
-                    {formatTooltipMoney(d.y, currency)}
-                  </Text>
-                  <Text style={{ color: '#374151', fontSize: 11, marginTop: 2 }}>
-                    {formatTooltipDate(d.date)}
-                  </Text>
-                </View>
-              );
-            },
-          } as any  
-        }
+          pointerVanishDelay: 2000,
+          autoAdjustPointerLabelPosition: true,
+          pointerLabelWidth: 126,
+          pointerLabelHeight: 58,
+
+          pointerLabelComponent: (items: any[]) => {
+            const d = items?.[0]?.item?.customData;
+            if (!d) return null;
+            return (
+              <View
+                style={{
+                  backgroundColor: '#E0EAFF',
+                  paddingVertical: 8,
+                  paddingHorizontal: 10,
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  borderColor: '#C7D2FE',
+                }}
+              >
+                <Text style={{ color: '#111827', fontSize: 12, fontWeight: '700' }}>
+                  {formatTooltipMoney(d.y, currency)}
+                </Text>
+                <Text style={{ color: '#374151', fontSize: 11, marginTop: 4 }}>
+                  {formatTooltipDate(d.date)}
+                </Text>
+              </View>
+            );
+          },
+        }}
       />
 
     </View>
