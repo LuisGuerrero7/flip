@@ -44,11 +44,11 @@ export default function LoginScreen() {
             tw`flex-row items-center justify-center bg-white rounded-full py-3 mb-3`,
             { shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 3 },
           ]}
-        >
-          <FontAwesome name="apple" size={22} color="black" style={tw`mr-2`} />
+        > 
           <Text style={[tw`font-semibold text-base`, { color: colors.textDark }]}>
             Continue with Apple
           </Text>
+          <FontAwesome name="apple" size={22} color="black" style={tw`mr-2`} />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -58,11 +58,12 @@ export default function LoginScreen() {
             { backgroundColor: colors.primary },
           ]}
         >
-          <FontAwesome name="google" size={20} color="white" style={tw`mr-2`} />
-
+          
           <Text style={[tw`font-semibold text-base text-white`]}>
             Continue with Google
           </Text>
+          <FontAwesome name="google" size={20} color="white" style={tw`mr-2`} />
+
         </TouchableOpacity>
 
         <TouchableOpacity onPress={go}>

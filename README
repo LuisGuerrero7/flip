@@ -1,0 +1,185 @@
+# 💰 Flip Dashboard — Prueba Técnica Mobile (Expo)
+
+Aplicación **Financiera Mobile** desarrollada como **prueba técnica para Flip Inversiones**.  
+El proyecto implementa un **Login** y un **Dashboard financiero interactivo**, replicando fielmente el diseño del mockup entregado.  
+Construido completamente con **React Native + Expo + Tailwind (twrnc) + Zustand**, aplicando buenas prácticas, arquitectura modular y componentes reutilizables.
+
+---
+
+## 📱 Descripción general
+
+### 🧩 1️⃣ Login Page
+- Fondo con **degradado creado con `expo-linear-gradient`**.  
+- Imagen principal `image.png` como fondo visual del login.  
+- Botones de inicio de sesión:
+  - **Continue with Apple**
+  - **Continue with Google**
+  - **Sign Up**
+- Cualquier botón inicia sesión simulada (guarda usuario aleatorio en Zustand) y redirige al Dashboard.
+- Diseño coherente y fiel al **Mockup.png** entregado por Flip.
+
+### 📊 2️⃣ Dashboard Financiero
+- Encabezado con saludo dinámico: “Good morning, [Nombre Aleatorio]!”.
+- Avatar circular a la izquierda e ícono de notificaciones (usando **`@expo/vector-icons`**).
+- Tarjeta de saldo activo con selector de moneda (**USD ↔ Soles**).
+- Filtros de período: “1 Day”, “1 Week”, “1 Month”, “1 Year”, “All”.
+- Gráfico de ingresos interactivo usando **`react-native-gifted-charts`** con tooltip visual que muestra monto y fecha.
+- Valor total mostrado al pie del gráfico.
+- Colores, sombras y layout replican fielmente el diseño proporcionado.
+
+---
+
+## 🧠 Objetivos técnicos evaluados
+
+✅ **Uso completo de Expo** (builds, módulos, optimización mobile)  
+✅ **Gestión de estado con Zustand**  
+✅ **Estilos rápidos con Tailwind (twrnc)** sin necesidad de NativeWind  
+✅ **Buenas prácticas de arquitectura** (componentes modulares, DRY, naming)  
+✅ **Fidelidad visual con Mockup**  
+✅ **Gráfica funcional e interactiva con tooltip real**  
+✅ **Compatibilidad para build en APK (EAS Build)**  
+
+---
+
+## 🧩 Tecnologías utilizadas
+
+| Tecnología | Descripción |
+|-------------|--------------|
+| **[Expo](https://expo.dev/)** | Framework principal. Usado para el entorno, la CLI, la build (EAS), y módulos nativos como LinearGradient y VectorIcons. |
+| **[EAS Build](https://docs.expo.dev/build/introduction/)** | Sistema oficial de Expo para generar APKs y AABs directamente desde la nube. |
+| **[Expo Linear Gradient](https://docs.expo.dev/versions/latest/sdk/linear-gradient/)** | Crea fondos con degradados (usado en la pantalla de Login). |
+| **[@expo/vector-icons](https://docs.expo.dev/guides/icons/)** | Íconos para Apple, Google, notificaciones, etc. |
+| **[React Native](https://reactnative.dev/)** | Framework base para crear la app mobile. |
+| **[Tailwind CSS (twrnc)](https://github.com/jaredh159/tailwind-react-native-classnames)** | Estilos rápidos en React Native sin requerir Babel ni NativeWind. |
+| **[Zustand](https://github.com/pmndrs/zustand)** | Manejo global del estado (usuario, saldo, datos del gráfico). |
+| **[React Navigation](https://reactnavigation.org/)** | Navegación entre pantallas (Login → Dashboard). |
+| **[react-native-gifted-charts](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts)** | Librería para la gráfica interactiva con tooltip. |
+| **[TypeScript](https://www.typescriptlang.org/)** | Tipado estático y código más seguro. |
+
+---
+
+## ⚙️ Instalación y ejecución local
+
+1. **Clonar el repositorio**
+   ```bash
+   git clone https://github.com/LuisGuerrero7/flip.git
+   cd flip
+2. **Instalar dependencias**
+    npm install
+3. **Ejecutar el proyecto con Expo**
+
+## 🏗️ Generar APK (Build final con Expo)
+
+1️⃣ Iniciar sesión en Expo
+    npx expo login
+2️⃣ Configurar EAS (solo la primera vez)
+    npx eas build:configure
+3️⃣ Crear la build APK    
+    npx eas build -p android --profile preview --clear-cache
+
+# 🧩 Estructura del Proyecto — Flip Dashboard (Expo + Zustand)
+
+Este documento describe la estructura de carpetas y el propósito de cada archivo en la aplicación **Flip Dashboard**, desarrollada con **Expo, React Native, Zustand y Tailwind (twrnc)**.
+
+---
+
+## 📁 Estructura general
+
+src/
+├── components/
+│ ├── Header.tsx
+│ ├── BalanceCard.tsx
+│ ├── PeriodSelector.tsx
+│ └── IncomeChart.tsx
+│
+├── screens/
+│ ├── LoginScreen.tsx
+│ └── DashboardScreen.tsx
+│
+├── store/
+│ └── useDashboardStore.ts
+│
+├── utils/
+│ └── format.ts
+│
+└── constants/
+└── theme.ts
+
+
+---
+
+## 🧱 Descripción de cada carpeta y archivo
+
+### 📂 `components/`
+Contiene **componentes reutilizables** que forman la interfaz del Dashboard.
+
+- **Header.tsx** → Muestra el saludo “Good morning, [nombre]”, avatar y campana de notificaciones.  
+- **BalanceCard.tsx** → Tarjeta que muestra el saldo activo y permite cambiar de USD ↔ Soles.  
+- **PeriodSelector.tsx** → Botones de rango temporal (“1D”, “1W”, “1M”, “1Y”, “All”) que actualizan el gráfico.  
+- **IncomeChart.tsx** → Gráfico interactivo con tooltip (monto y fecha). Usa `react-native-gifted-charts`.
+
+---
+
+### 📂 `screens/`
+Contiene las **pantallas principales** del flujo de navegación.
+
+- **LoginScreen.tsx** → Pantalla inicial con fondo degradado (`expo-linear-gradient`), imagen central y botones de inicio de sesión.  
+  Cualquier botón inicia sesión (función `initSession` del store) y navega al Dashboard.  
+- **DashboardScreen.tsx** → Pantalla principal. Agrupa los componentes: Header, BalanceCard, PeriodSelector e IncomeChart.
+
+---
+
+### 📂 `store/`
+Contiene el **estado global** manejado con **Zustand**.
+
+- **useDashboardStore.ts**  
+  Define y centraliza:
+  - `userName` → nombre aleatorio.  
+  - `balance` → monto aleatorio entre $15,000–$50,000.  
+  - `currency` → tipo de moneda actual.  
+  - `period` → rango seleccionado.  
+  - `data` → puntos generados para el gráfico.  
+  - Funciones: `initSession()`, `toggleCurrency()`, `setPeriod()`, `generateData()`.
+
+---
+
+### 📂 `utils/`
+Contiene **funciones auxiliares puras**.
+
+- **format.ts**  
+  - `formatTooltipMoney()` → formatea montos según moneda.  
+  - `formatTooltipDate()` → formatea fechas para mostrar en el tooltip del gráfico.  
+  > Usado principalmente en `IncomeChart.tsx`.
+
+---
+
+### 📂 `constants/`
+Contiene configuraciones fijas y constantes globales.
+
+- **theme.ts**  
+  - Define la paleta de colores de la aplicación (`primary`, `accent`, `textDark`, etc.).  
+  - Garantiza coherencia visual en todos los componentes.
+
+---
+
+### ⚙️ Archivos raíz
+
+- **App.tsx / index.tsx** → Punto de entrada del proyecto. Configura **React Navigation** para mover entre `Login` y `Dashboard`.  
+- **app.json** → Configuración de Expo (nombre, ícono, id del paquete).  
+- **eas.json** → Configuración de builds (APK y AAB) para **EAS Build**.  
+- **package.json** → Lista de dependencias y scripts.  
+- **tsconfig.json** → Configuración de TypeScript.
+
+---
+
+## 🧭 Flujo resumido
+
+LoginScreen
+↓ (initSession)
+useDashboardStore (crea usuario, balance, datos)
+↓
+DashboardScreen
+├── Header (usa userName)
+├── BalanceCard (usa balance y currency)
+├── PeriodSelector (modifica period)
+└── IncomeChart (muestra data y tooltip)
