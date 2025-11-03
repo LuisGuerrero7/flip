@@ -116,47 +116,47 @@ export default function IncomeChart() {
         spacing={spacing}
         showScrollIndicator={false}
 
-pointerConfig={{
-  activatePointersOnLongPress: true,
+        pointerConfig={{
+          activatePointersOnLongPress: true,
 
-  showPointerStrip: true,
-  pointerStripUptoDataPoint: true,
-  pointerStripColor: '#94A3B8',
-  pointerStripWidth: 1,
+          showPointerStrip: true,
+          pointerStripUptoDataPoint: true,
+          pointerStripColor: '#94A3B8',
+          pointerStripWidth: 1,
 
-  pointerColor: '#3B82F6',
-  radius: 5,
+          pointerColor: '#3B82F6',
+          radius: 5,
 
-  autoAdjustPointerLabelPosition: true,
-  pointerVanishDelay: 1400,     
-  pointerLabelWidth: 130,
-  pointerLabelHeight: 56,
+          autoAdjustPointerLabelPosition: true,
+          pointerVanishDelay: 1400,     
+          pointerLabelWidth: 130,
+          pointerLabelHeight: 56,
 
-  // contenido de la burbuja
-  pointerLabelComponent: (items: any[]) => {
-    const d = items?.[0]?.item?.customData as { date: Date; y: number } | undefined;
-    if (!d) return null;
-    return (
-      <View
-        style={{
-          backgroundColor: '#E0EAFF',
-          paddingVertical: 8,
-          paddingHorizontal: 10,
-          borderRadius: 10,
-          borderWidth: 1,
-          borderColor: '#C7D2FE',
-        }}
-      >
-        <Text style={{ color: '#111827', fontSize: 12, fontWeight: '700' }}>
-          {formatTooltipMoney(d.y, currency)}
-        </Text>
-        <Text style={{ color: '#374151', fontSize: 11, marginTop: 2 }}>
-          {formatTooltipDate(d.date)}
-        </Text>
-      </View>
-    );
-  },
-} as any}
+          // contenido de la burbuja
+          pointerLabelComponent: (items: any[]) => {
+            const d = items?.[0]?.item?.customData as { date: Date; y: number } | undefined;
+            if (!d) return null;
+            return (
+              <View
+                style={{
+                  backgroundColor: '#E0EAFF',
+                  paddingVertical: 8,
+                  paddingHorizontal: 10,
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  borderColor: '#C7D2FE',
+                }}
+              >
+                <Text style={{ color: '#111827', fontSize: 12, fontWeight: '700' }}>
+                  {formatTooltipMoney(d.y, currency)}
+                </Text>
+                <Text style={{ color: '#374151', fontSize: 11, marginTop: 2 }}>
+                  {formatTooltipDate(d.date)}
+                </Text>
+              </View>
+            );
+          },
+        } as any}
 
       />
     </View>

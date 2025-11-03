@@ -5,7 +5,7 @@ import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/native';
 import { useDashboardStore } from '../store/useDashboardStore';
 import { colors } from '../constants/theme';
-import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function LoginScreen() {
   const nav = useNavigation<any>();
@@ -45,8 +45,7 @@ export default function LoginScreen() {
             { shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 3 },
           ]}
         >
-          <AntDesign className="apple1" size={20} color="black" style={tw`mr-2`} />
-
+          <FontAwesome name="apple" size={22} color="black" style={tw`mr-2`} />
           <Text style={[tw`font-semibold text-base`, { color: colors.textDark }]}>
             Continue with Apple
           </Text>
@@ -59,10 +58,11 @@ export default function LoginScreen() {
             { backgroundColor: colors.primary },
           ]}
         >
-          <Text style={[tw`font-semibold text-base text-white mr-2`]}>
+          <FontAwesome name="google" size={20} color="white" style={tw`mr-2`} />
+
+          <Text style={[tw`font-semibold text-base text-white`]}>
             Continue with Google
           </Text>
-          <Text style={{ fontSize: 18, color: 'white' }}>G</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={go}>
