@@ -87,7 +87,7 @@ export default function IncomeChart() {
         </Text>
       </View>
 
-      <LineChart
+     <LineChart
         data={chartData}
         areaChart
         curved
@@ -102,6 +102,7 @@ export default function IncomeChart() {
         hideDataPoints
         backgroundColor="white"
 
+        // Rejilla y ejes
         yAxisThickness={0}
         xAxisThickness={0}
         noOfSections={4}
@@ -111,30 +112,32 @@ export default function IncomeChart() {
         yAxisTextStyle={{ color: colors.textGray, fontSize: 10 }}
         xAxisLabelTextStyle={{ color: colors.textGray, fontSize: 11, marginTop: 6 }}
 
+        // Sin desbordes
         initialSpacing={initialSpacing}
         endSpacing={endSpacing}
         spacing={spacing}
         showScrollIndicator={false}
 
-        pointerConfig={{
-          activatePointersOnLongPress: true,
+        // === BURBUJA / TOOLTIP ===
+      pointerConfig={
+        {
+          // Tap inmediato (no long press)
+          activatePointersOnLongPress: false,
 
-          showPointerStrip: true,
+          // Línea vertical y punto
           pointerStripUptoDataPoint: true,
           pointerStripColor: '#94A3B8',
           pointerStripWidth: 1,
-
           pointerColor: '#3B82F6',
           radius: 5,
 
+          // Burbuja (tooltip)
           autoAdjustPointerLabelPosition: true,
-          pointerVanishDelay: 1400,     
-          pointerLabelWidth: 130,
+          pointerVanishDelay: 1800,
+          pointerLabelWidth: 120,
           pointerLabelHeight: 56,
-
-          // contenido de la burbuja
           pointerLabelComponent: (items: any[]) => {
-            const d = items?.[0]?.item?.customData as { date: Date; y: number } | undefined;
+            const d = items?.[0]?.item?.customData;
             if (!d) return null;
             return (
               <View
@@ -156,9 +159,11 @@ export default function IncomeChart() {
               </View>
             );
           },
-        } as any}
+        } as any
+      }
 
-      />
+/>
+
     </View>
   );
 }
