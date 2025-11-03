@@ -22,13 +22,11 @@ export default function LoginScreen() {
       colors={[colors.backgroundGradientTop, colors.backgroundGradientBottom]}
       style={tw`flex-1 items-center justify-center`}
     >
-      {/* Logo o cubo */}
       <Image
         source={require('../../assets/image_bg_removed.png')}
         style={{ width: 420, height: 420, resizeMode: 'contain', marginBottom: 18 }}
       />
 
-      {/* Texto principal */}
       <Text
         style={[
           tw`text-center text-white font-bold px-8`,
@@ -47,7 +45,6 @@ export default function LoginScreen() {
             { shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 3 },
           ]}
         >
-          {/* Ícono de Apple */}
           <AntDesign className="apple1" size={20} color="black" style={tw`mr-2`} />
 
           <Text style={[tw`font-semibold text-base`, { color: colors.textDark }]}>

@@ -48,7 +48,6 @@ export default function IncomeChart() {
   const { data, period, currency } = useDashboardStore();
   const series = data[period];
 
-  // ancho útil de la gráfica dentro de la card
   const innerWidth = screenW - 64;
 
   const chartData: ChartPoint[] = series.map((p, i) => ({
@@ -62,7 +61,6 @@ export default function IncomeChart() {
     [series]
   );
 
-  // Sin overflow: espaciados calculados
   const initialSpacing = 12;
   const endSpacing = 12;
   const spacing =
@@ -76,17 +74,10 @@ export default function IncomeChart() {
   return (
     <View
       style={[
-        tw`mx-4 mt-5 rounded-2xl p-4`,
-        {
-          backgroundColor: 'white',
-          shadowColor: '#000',
-          shadowOpacity: 0.06,
-          shadowRadius: 6,
-          elevation: 3,
-        },
+        tw`mx-4 mt-5 p-4`,
       ]}
     >
-      {/* Header */}
+
       <View style={tw`flex-row justify-between items-center mb-2`}>
         <Text style={{ color: colors.textDark, fontSize: 15, fontWeight: '600' }}>
           Income
@@ -111,7 +102,6 @@ export default function IncomeChart() {
         hideDataPoints
         backgroundColor="white"
 
-        // Rejilla sutil
         yAxisThickness={0}
         xAxisThickness={0}
         noOfSections={4}
@@ -121,32 +111,24 @@ export default function IncomeChart() {
         yAxisTextStyle={{ color: colors.textGray, fontSize: 10 }}
         xAxisLabelTextStyle={{ color: colors.textGray, fontSize: 11, marginTop: 6 }}
 
-        // Sin desbordes
         initialSpacing={initialSpacing}
         endSpacing={endSpacing}
         spacing={spacing}
         showScrollIndicator={false}
 
-        // === Puntero / Burbuja ===
-        // IMPORTANTE: en Gifted Charts la burbuja aparece al mantener presionado y arrastrar.
-        // 'pointerConfig' es la API correcta (no existe 'showPointer').
 pointerConfig={{
-  // gesto: mantener presionado y arrastrar
   activatePointersOnLongPress: true,
 
-  // muestra la línea vertical y que llegue al punto
   showPointerStrip: true,
   pointerStripUptoDataPoint: true,
   pointerStripColor: '#94A3B8',
   pointerStripWidth: 1,
 
-  // punto azul del puntero
   pointerColor: '#3B82F6',
   radius: 5,
 
-  // comportamiento/posición de la tarjeta
   autoAdjustPointerLabelPosition: true,
-  pointerVanishDelay: 1400,     // tiempo antes de ocultarse (ms)
+  pointerVanishDelay: 1400,     
   pointerLabelWidth: 130,
   pointerLabelHeight: 56,
 
