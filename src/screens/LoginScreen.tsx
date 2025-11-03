@@ -5,6 +5,7 @@ import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/native';
 import { useDashboardStore } from '../store/useDashboardStore';
 import { colors } from '../constants/theme';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function LoginScreen() {
   const nav = useNavigation<any>();
@@ -46,10 +47,12 @@ export default function LoginScreen() {
             { shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 3 },
           ]}
         >
-          <Text style={[tw`font-semibold text-base mr-2`, { color: colors.textDark }]}>
+          {/* Ícono de Apple */}
+          <AntDesign className="apple1" size={20} color="black" style={tw`mr-2`} />
+
+          <Text style={[tw`font-semibold text-base`, { color: colors.textDark }]}>
             Continue with Apple
           </Text>
-          <Text style={{ fontSize: 18 }}></Text>
         </TouchableOpacity>
 
         <TouchableOpacity
